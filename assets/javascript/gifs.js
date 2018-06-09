@@ -45,6 +45,7 @@ $('.movies').on('click', function () {
             let movieImg = $("<img>")
                 .addClass('gifImg')
                 .attr('src', stillUrl)
+                .attr('stopper', stillUrl)
                 .attr('alt', 'gif of a movie scene')
                 .attr('data-state', 'still')
                 .attr('animater', movingUrl)
@@ -52,20 +53,23 @@ $('.movies').on('click', function () {
             $('.gifSpace').prepend(movieImg);
 
 
-            startGif();
+            
 
-
+            
         }
 
+        clickGif();
         
+        
+            
     })
 
 });
 
 
-//Turn gifs on
+//Turn gifs on and off
 
-function startGif() {
+function clickGif() {
     $('.gifImg').on('click', function () {
 
 
@@ -75,6 +79,12 @@ function startGif() {
             
             let a = $(this).attr('animater')
             $(this).attr('src', a)
+        } else {
+            
+            $(this).attr('data-state', 'still')
+            let b = $(this).attr('stopper')
+            // let a = $(this).attr('animater')
+            $(this).attr('src', b)
         } 
 
         console.log('this ' + $(this).attr('data-state'))
@@ -93,7 +103,7 @@ function startGif() {
     
 
 
-//Turn gifs off
+
 //Show rating below each gif
 
 
