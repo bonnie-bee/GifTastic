@@ -1,43 +1,51 @@
 //Array of topics to turn into buttons
 const topics = ["Clueless", "Girls Trip", "Crazy Rich Asians", "When Harry Met Sally", "Moana", "Bridget Jones Diary", "Bridesmaids", "Moonstruck", "Bend It Like Beckham", "To Wong Foo With Love From Julie Newmar"];
+makeBtns();
 
 //Make buttons
-for (let i = 0; i < topics.length; i++) {
-    let buttons = $('<button>')
-        .addClass('movies')
-        .attr('data-type', topics[i])
-        .text(topics[i]);
+function makeBtns() {
+    $('.buttonSpace').empty();
 
-    //Append buttons to .buttonSpace
-    $('.buttonSpace').append(buttons)
+    for (let i = 0; i < topics.length; i++) {
+        let buttons = $('<button>')
+            .addClass('movies')
+            .attr('data-type', topics[i])
+            .text(topics[i]);
+
+        $('.buttonSpace').append(buttons)
+    }
 }
 
+
+//Add user input to array
+$('#submitGif').on('click', function () {
+    let userGif = $('#inputGif').val().trim()
+    topics.push(userGif);
+    makeBtns();
+})
 
 
 
 //Click button to get static gifs
-$('.movies').on('click', function () {
+$(document).on('click', '.movies', function () {
+
     const name = $(this).attr('data-type');
-    // const key = "cqSSpY4XuKE5YrQJnI8qVFRtFBMTJvg4";
     const queryURL = `http://api.giphy.com/v1/gifs/search?q=${name}&api_key=cqSSpY4XuKE5YrQJnI8qVFRtFBMTJvg4&limit=10`
 
-
-    //empty the gif space each time you click a button
     $('.gifSpace').empty()
 
-    //Ajax query
     $.ajax({
         url: queryURL,
         method: "GET"
     }).then(function (response) {
+
         console.log(response);
-
-        let stillUrl;
-        let movingUrl;
-
 
         for (let i = 0; i < response.data.length; i++) {
 
+            let ratings = $('<p>').attr('class', 'gifRatings');
+            $('.gifSpace').append(ratings);
+            ratings.text('Gif rating: ' + response.data[i].rating);
 
             stillUrl = response.data[i].images.fixed_height_still.url;
             movingUrl = response.data[i].images.fixed_height.url;
@@ -45,25 +53,15 @@ $('.movies').on('click', function () {
             let movieImg = $("<img>")
                 .addClass('gifImg')
                 .attr('src', stillUrl)
-                .attr('stopper', stillUrl)
-                .attr('alt', 'gif of a movie scene')
+                .attr('data-stop', stillUrl)
                 .attr('data-state', 'still')
-                .attr('animater', movingUrl)
+                .attr('data-animate', movingUrl)
+                .attr('alt', 'gif of a movie scene');
 
-            $('.gifSpace').prepend(movieImg);
-
-
-            
-
-            
-        }
-
+            $(ratings).append(movieImg);
+        };
         clickGif();
-        
-        
-            
-    })
-
+    });
 });
 
 
@@ -72,42 +70,21 @@ $('.movies').on('click', function () {
 function clickGif() {
     $('.gifImg').on('click', function () {
 
-
         if ($(this).attr('data-state') === 'still') {
-            
-            $(this).attr('data-state', 'animate')
-            
-            let a = $(this).attr('animater')
-            $(this).attr('src', a)
+
+            $(this).attr('data-state', 'animate');
+            let a = $(this).attr('data-animate');
+            $(this).attr('src', a);
+
         } else {
-            
-            $(this).attr('data-state', 'still')
-            let b = $(this).attr('stopper')
-            // let a = $(this).attr('animater')
-            $(this).attr('src', b)
-        } 
 
-        console.log('this ' + $(this).attr('data-state'))
-        console.log('source ' + $(this).attr('src'))
+            $(this).attr('data-state', 'still');
+            let b = $(this).attr('data-stop');
+            $(this).attr('src', b);
 
+        };
     });
-
 }
+;
 
 
-
-
-
-
-
-    
-
-
-
-//Show rating below each gif
-
-
-//Make a form for users to input new topics
-//Add input to topics array
-//Clear .buttonSpace 
-//Make new buttons from array
