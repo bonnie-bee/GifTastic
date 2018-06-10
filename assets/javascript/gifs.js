@@ -1,5 +1,5 @@
 //Array of topics to turn into buttons
-const topics = ["Clueless", "Girls Trip", "Crazy Rich Asians", "When Harry Met Sally", "Moana", "Bridget Jones Diary", "Bridesmaids", "Moonstruck", "Bend It Like Beckham", "To Wong Foo With Love From Julie Newmar"];
+const topics = ["Harry Potter", "Hermione Granger", "Ron Weasley", "Neville Longbottom", "Sirius Black", "Albus Dumbledore", "Lavender Brown", "Severus Snape", "Dean Thomas", "Draco Malfoy"];
 makeBtns();
 
 //Make buttons
@@ -30,7 +30,7 @@ $('#submitGif').on('click', function () {
 $(document).on('click', '.movies', function () {
 
     const name = $(this).attr('data-type');
-    const queryURL = `http://api.giphy.com/v1/gifs/search?q=${name}&api_key=cqSSpY4XuKE5YrQJnI8qVFRtFBMTJvg4&limit=10`
+    const queryURL = `https://api.giphy.com/v1/gifs/search?q=${name}&api_key=cqSSpY4XuKE5YrQJnI8qVFRtFBMTJvg4&limit=10`
 
     $('.gifSpace').empty()
 
@@ -45,7 +45,9 @@ $(document).on('click', '.movies', function () {
 
             let ratings = $('<p>').attr('class', 'gifRatings');
             $('.gifSpace').append(ratings);
-            ratings.text('Gif rating: ' + response.data[i].rating);
+            ratings.html(`<span id="justText"><h2>Title: ${response.data[i].title}</h2><br><h3>Gif rating: ${response.data[i].rating}<h3></span>`);
+
+
 
             stillUrl = response.data[i].images.fixed_height_still.url;
             movingUrl = response.data[i].images.fixed_height.url;
@@ -53,6 +55,7 @@ $(document).on('click', '.movies', function () {
             let movieImg = $("<img>")
                 .addClass('gifImg')
                 .attr('src', stillUrl)
+                .attr('download', movingUrl)
                 .attr('data-stop', stillUrl)
                 .attr('data-state', 'still')
                 .attr('data-animate', movingUrl)

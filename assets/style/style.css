@@ -1,3 +1,63 @@
+html{
+    cursor: url('../images/wand.png'), auto;
+}
+
+
+body{
+    background: url('../images/castleWall1.jpg');
+}
+
+
+#rightSconce{
+    float: right;
+}
+
+
+#leftSconce{
+    float: left;
+}
+
+
+.inputs{
+    font-size: 3em;
+    text-align: center;
+    background-color: lightgoldenrodyellow;
+    border: 40px gold solid;
+    border-image: url('../images/topframe.png') 200 round ;
+}
+
+
 .movies{
     margin: 2% 0% 0% 1% ;
+    background-color: gold;
+    width: 10%;
+    cursor: url('../images/wand.png'), auto;
 }
+
+
+.gifRatings{
+    position: relative;
+    left: 5%;
+    display: inline-block;
+    margin-right: 5%; 
+    margin-top: 5%;
+    cursor: url('../images/wand.png'), auto;
+    
+}
+
+#justText{
+    font-size: 2em;
+    color: black;
+    font-family: 'Catamaran', sans-serif;
+    font-weight: bolder;
+    text-align: center;
+}
+
+.gifImg{
+ border: 40px gold solid;
+ border-image: url('../images/fram2.png') 200 round ;
+ cursor: url('../images/wand.png'), auto;   
+}
+
+
+
