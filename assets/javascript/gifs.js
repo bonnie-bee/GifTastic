@@ -30,7 +30,7 @@ $('#submitGif').on('click', function () {
 $(document).on('click', '.movies', function () {
 
     const name = $(this).attr('data-type');
-    const queryURL = `http://api.giphy.com/v1/gifs/search?q=${name}&api_key=cqSSpY4XuKE5YrQJnI8qVFRtFBMTJvg4&limit=10`
+    const queryURL = `https://api.giphy.com/v1/gifs/search?q=${name}&api_key=cqSSpY4XuKE5YrQJnI8qVFRtFBMTJvg4&limit=10`
 
     $('.gifSpace').empty()
 
