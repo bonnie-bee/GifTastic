@@ -54,11 +54,11 @@ $(document).on('click', '.movies', function () {
 
             let movieImg = $("<img>")
                 .addClass('gifImg')
-                .attr('src', stillUrl)
-                .attr('download', movingUrl)
-                .attr('data-stop', stillUrl)
-                .attr('data-state', 'still')
-                .attr('data-animate', movingUrl)
+                .attr('src', movingUr)
+                .attr('download', stillUrll)
+                .attr('data-stop', movingUrl)
+                .attr('data-state', 'animate')
+                .attr('data-animate', stillUrl)
                 .attr('alt', 'gif of a movie scene');
 
             $(ratings).append(movieImg);
